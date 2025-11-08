@@ -42,10 +42,15 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               TextFormField(
-                validator: (name) =>
-                name == null || name.length < 3
-                    ? 'Name should be at least 3 characters'
-                    : null,
+                validator: (email) {
+                  if (email == null || email.isEmpty) {
+                    return 'Email is required';
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+                    return 'Enter a valid email';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                   filled: true,
                   border: OutlineInputBorder(),

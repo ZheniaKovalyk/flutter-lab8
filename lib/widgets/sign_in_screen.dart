@@ -49,10 +49,15 @@ class SignInScreen extends StatelessWidget {
                   border: OutlineInputBorder(),
                   labelText: "enter email",
                 ),
-                validator: (name) =>
-                name == null || name.length < 3
-                    ? 'Name should be at least 3 characters'
-                    : null,
+                validator: (email) {
+                  if (email == null || email.isEmpty) {
+                    return 'Email is required';
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+                    return 'Enter a valid email';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 15),
               const Text(

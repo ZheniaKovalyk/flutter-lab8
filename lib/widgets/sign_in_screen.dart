@@ -50,7 +50,10 @@ class SignInScreen extends StatelessWidget {
                   labelText: "enter email",
                 ),
                 validator: (email) {
-                  if (email == null || email.isEmpty) {
+                  if (email == null || email.length <7) {
+                    return 'Email should be at least 7 characters';
+                  }
+                  if (email.isEmpty) {
                     return 'Email is required';
                   }
                   if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
@@ -73,8 +76,8 @@ class SignInScreen extends StatelessWidget {
                   labelText: "enter password",
                 ),
                 validator: (password) =>
-                password == null || password.length < 6
-                    ? 'Password should be at least 6 characters'
+                password == null || password.length < 7
+                    ? 'Password should be at least 7 characters'
                     : null,
               ),
               const SizedBox(height: 20),
